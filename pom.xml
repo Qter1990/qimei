@@ -9,12 +9,12 @@
         <version>2.0.1.RELEASE</version>
     </parent>
 
-    <groupId>cn.stylefeng.guns</groupId>
-    <artifactId>guns</artifactId>
+    <groupId>com.vincent.qimei</groupId>
+    <artifactId>qimei</artifactId>
     <version>1.0.0</version>
 
-    <name>guns-admin</name>
-    <description>guns 的spring boot版本</description>
+    <name>qimei-admin</name>
+    <description>qimei 的spring boot版本</description>
 
     <packaging>jar</packaging>
 
