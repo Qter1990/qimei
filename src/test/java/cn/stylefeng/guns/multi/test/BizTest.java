@@ -2,6 +2,7 @@ package cn.stylefeng.guns.multi.test;
 
 import cn.stylefeng.guns.base.BaseJunit;
 import cn.stylefeng.guns.multi.service.TestService;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,6 +19,7 @@ public class BizTest extends BaseJunit {
 
     @Test
     public void test() {
+		
         testService.testGuns();
 
         testService.testBiz();

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.qimei.dao.GoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.qimei.model.Goods">
+        <id column="id" property="id" />
+        <result column="number" property="number" />
+        <result column="name" property="name" />
+        <result column="unit_id" property="unitId" />
+        <result column="image_url" property="imageUrl" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="flag" property="flag" />
+    </resultMap>
+    
+    <resultMap id="GoodMap" type="cn.stylefeng.guns.modular.qimei.model.Goods">
+        <id column="id" property="id" />
+        <result column="number" property="number" />
+        <result column="name" property="name" />
+        <result column="unit_id" property="unitId" />
+        <result column="image_url" property="imageUrl" />
+        <collection property="specGoods" javaType="ArrayList"  ofType="cn.stylefeng.guns.modular.qimei.model.SpecGood" select="getSpecGoods" column="id" ></collection>
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="flag" property="flag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, number, name, unit_id, image_url, create_date, update_date, flag
+    </sql>
+    
+    <select id="getGoods" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+ 		select * from qimei_goods A, qimei_spec_good B where A.id=B.goo
+    </select>
+
+</mapper>
