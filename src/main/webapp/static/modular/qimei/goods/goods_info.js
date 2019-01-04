@@ -39,7 +39,16 @@ GoodsInfoDlg.get = function(key) {
 GoodsInfoDlg.close = function() {
     parent.layer.close(window.parent.Goods.layerIndex);
 }
-
+/**
+ * item获取新的id
+ */
+GoodsInfoDlg.newId = function () {
+    if(this.count == undefined){
+        this.count = 0;
+    }
+    this.count = this.count + 1;
+    return "dictItem" + this.count;
+};
 /**
  * 收集数据
  */
@@ -52,6 +61,14 @@ GoodsInfoDlg.collectData = function() {
     .set('createDate')
     .set('updateDate')
     .set('flag');
+}
+
+/**
+ * 添加条目
+ */
+GoodsInfoDlg.addItem = function () {
+    $("#itemsArea").append(this.itemTemplate);
+    $("#dictItem").attr("id", this.newId());
 }
 
 /**
@@ -73,6 +90,7 @@ GoodsInfoDlg.addSubmit = function() {
     ajax.set(this.goodsInfoData);
     ajax.start();
 }
+
 
 /**
  * 提交修改

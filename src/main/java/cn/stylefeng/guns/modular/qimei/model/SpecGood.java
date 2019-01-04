@@ -25,6 +25,10 @@ public class SpecGood extends Model<SpecGood> {
      * 规格名称
      */
     private String name;
+    /*
+     * 规格值
+     */
+    private String value;
     /**
      * 商品ID
      */
@@ -75,7 +79,15 @@ public class SpecGood extends Model<SpecGood> {
         this.name = name;
     }
 
-    public Integer getGoodsId() {
+    public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public Integer getGoodsId() {
         return goodsId;
     }
 

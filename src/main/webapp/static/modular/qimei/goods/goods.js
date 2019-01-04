@@ -14,17 +14,23 @@ var Goods = {
 Goods.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: 'ID', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '主图', field: 'image', visible: true, align: 'center', valign: 'middle'},
+            {title: '主图', field: 'image', visible: true, align: 'center', valign: 'middle', formatter:function(value,row,index){
+            	var s;
+            	if(row.image!=null){
+	            	var url = row.image;
+	            	s = '<img style="width:300;height:100px;"  src="'+url+'" /></a>';
+            	}
+            	 return s;}
+            },
             {title: '商品编号', field: 'number', visible: true, align: 'center', valign: 'middle'},
             {title: '商品名称', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '商品规格', field: 'spec', visible: true, align: 'center', valign: 'middle'},
             {title: '单位', field: 'unit', visible: true, align: 'center', valign: 'middle'},
             {title: '成本价', field: 'cost', visible: true, align: 'center', valign: 'middle'},
-            {title: '预定', field: 'book', visible: true, align: 'center', valign: 'middle'},
+            {title: '预定', field: 'book_count', visible: true, align: 'center', valign: 'middle'},
             {title: '库存', field: 'stock', visible: true, align: 'center', valign: 'middle'},
-            {title: '创建时间', field: 'createDate', visible: true, align: 'center', valign: 'middle'},
-            {title: '更新时间', field: 'updateDate', visible: true, align: 'center', valign: 'middle'}
+            {title: '创建时间', field: 'create_date', visible: true, align: 'center', valign: 'middle'},
+            {title: '更新时间', field: 'update_date', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -102,6 +108,6 @@ Goods.search = function () {
 $(function () {
     var defaultColunms = Goods.initColumn();
     var table = new BSTable(Goods.id, "/goods/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
     Goods.table = table.init();
 });

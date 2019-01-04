@@ -33,5 +33,5 @@ public interface IGoodsService extends IService<Goods> {
 	/*
 	 * 获取商品列表
 	 */
-	List<SpecGood> getSpecGood(String goodName);
+	List<Map<String, Object>> getSpecGood(Page<SpecGood> page, String goodName);
 }

@@ -55,7 +55,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	}
 
 	@Override
-	public List<SpecGood> getSpecGood(String goodName) {
-		return specGoodMapper.getSpecGood(goodName);
+	public List<Map<String, Object>> getSpecGood(Page<SpecGood> page, String goodName) {
+		return specGoodMapper.getSpecGood(page, goodName);
 	}
 }

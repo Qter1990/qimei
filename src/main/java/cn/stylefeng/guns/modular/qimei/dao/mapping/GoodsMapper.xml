@@ -38,7 +38,7 @@
     </sql>
     
     <select id="getGoods" resultMap="GoodMap" parameterType="com.baomidou.mybatisplus.plugins.Page">
- 		select g.*, s.id as spec_good_id, s.name as spec_name, s.stock, s.cost, s.book_count from qimei_goods g, qimei_spec_good s where 1=1
+ 		select g.*, s.id as spec_good_id, s.name as spec_name, s.value as spec_value, s.stock, s.cost, s.book_count from qimei_goods g, qimei_spec_good s where 1=1
     </select>
 
 </mapper>
