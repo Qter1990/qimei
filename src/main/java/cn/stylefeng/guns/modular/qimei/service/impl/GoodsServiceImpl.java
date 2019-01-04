@@ -50,8 +50,12 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	}
 
 	@Override
-	public List<Map<String, Object>> getGoods(Page<SpecGood> page, String goodName, String orderByField, boolean asc) {
+	public List<Goods> getGoods( String goodName) {
+		return goodsMapper.getGoods(goodName);
+	}
 
-		return new ArrayList<>();
+	@Override
+	public List<SpecGood> getSpecGood(String goodName) {
+		return specGoodMapper.getSpecGood(goodName);
 	}
 }

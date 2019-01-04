@@ -1,5 +1,9 @@
 package cn.stylefeng.guns.modular.qimei.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import cn.stylefeng.guns.modular.qimei.model.SpecGood;
@@ -13,5 +17,5 @@ import cn.stylefeng.guns.modular.qimei.model.SpecGood;
  * @since 2019-01-03
  */
 public interface SpecGoodMapper extends BaseMapper<SpecGood> {
-
+	public List<SpecGood> getSpecGood(@Param("goodName")String goodName);
 }

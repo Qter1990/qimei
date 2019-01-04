@@ -52,6 +52,11 @@ public class SpecGood extends Model<SpecGood> {
     @TableField("update_date")
     private Date updateDate;
     private String flag;
+    
+    /*
+     * 商品
+     */
+    private Goods good;
 
 
     public Integer getId() {
@@ -134,7 +139,15 @@ public class SpecGood extends Model<SpecGood> {
         this.flag = flag;
     }
 
-    @Override
+    public Goods getGood() {
+		return good;
+	}
+
+	public void setGood(Goods good) {
+		this.good = good;
+	}
+
+	@Override
     protected Serializable pkVal() {
         return this.id;
     }
@@ -152,6 +165,7 @@ public class SpecGood extends Model<SpecGood> {
         ", createDate=" + createDate +
         ", updateDate=" + updateDate +
         ", flag=" + flag +
+        ", good=" + good.toString() +
         "}";
     }
 }

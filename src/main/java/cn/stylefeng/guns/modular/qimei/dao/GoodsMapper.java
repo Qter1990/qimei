@@ -21,5 +21,5 @@ import cn.stylefeng.guns.modular.qimei.model.SpecGood;
  */
 public interface GoodsMapper extends BaseMapper<Goods> {
 	
-	public List<Map<String, Object>> getGoods(@Param("page")Page<SpecGood> page, @Param("goodName")String goodName, @Param("orderByField")String orderByField, @Param("isAsc")boolean isAsc) ;
+	public List<Goods> getGoods(@Param("goodName")String goodName) ;
 }

@@ -20,10 +20,16 @@
         <result column="name" property="name" />
         <result column="unit_id" property="unitId" />
         <result column="image_url" property="imageUrl" />
-        <collection property="specGoods" javaType="ArrayList"  ofType="cn.stylefeng.guns.modular.qimei.model.SpecGood" select="getSpecGoods" column="id" ></collection>
         <result column="create_date" property="createDate" />
         <result column="update_date" property="updateDate" />
         <result column="flag" property="flag" />
+        <collection property="specGoods"  ofType="cn.stylefeng.guns.modular.qimei.model.SpecGood" column="id" >
+	        <id column="spec_good_id" property="id" />
+	        <result column="spec_name" property="name" />
+	        <result column="stock" property="stock" />
+	        <result column="cost" property="cost" />
+	        <result column="book_count" property="bookCount" />
+        </collection>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -31,8 +37,8 @@
         id, number, name, unit_id, image_url, create_date, update_date, flag
     </sql>
     
-    <select id="getGoods" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
- 		select * from qimei_goods A, qimei_spec_good B where A.id=B.goo
+    <select id="getGoods" resultMap="GoodMap" parameterType="com.baomidou.mybatisplus.plugins.Page">
+ 		select g.*, s.id as spec_good_id, s.name as spec_name, s.stock, s.cost, s.book_count from qimei_goods g, qimei_spec_good s where 1=1
     </select>
 
 </mapper>

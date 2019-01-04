@@ -28,5 +28,10 @@ public interface IGoodsService extends IService<Goods> {
 	/*
 	 * 获取商品列表
 	 */
-	List<Map<String, Object>> getGoods(Page<SpecGood> page, String goodName, String orderByField, boolean asc);
+	List<Goods> getGoods(String goodName);
+	
+	/*
+	 * 获取商品列表
+	 */
+	List<SpecGood> getSpecGood(String goodName);
 }
