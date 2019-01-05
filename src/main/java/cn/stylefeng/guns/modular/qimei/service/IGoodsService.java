@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.IService;
 import cn.stylefeng.guns.modular.qimei.model.Goods;
 import cn.stylefeng.guns.modular.qimei.model.SpecGood;
 import cn.stylefeng.guns.modular.system.model.LoginLog;
+import springfox.documentation.swagger.web.SwaggerApiListingReader;
 
 /**
  * <p>
@@ -23,7 +24,12 @@ public interface IGoodsService extends IService<Goods> {
 	/*
 	 * 添加多种规格商品
 	 */
-	public void addGoods(Goods goods, List<SpecGood> specGoodList); 
+	public void addGoods(Goods goods, Map<String, String> specGoodMap); 
+	
+	/*
+	 * 添加多种规格商品 参数字符串
+	 */
+	public void addGoods(String goodName, String imageUrl, String unitId, String specStr);
 	
 	/*
 	 * 获取商品列表
@@ -34,4 +40,9 @@ public interface IGoodsService extends IService<Goods> {
 	 * 获取商品列表
 	 */
 	List<Map<String, Object>> getSpecGood(Page<SpecGood> page, String goodName);
+	
+	/*
+	 * 获取商品详情
+	 */
+	SpecGood selectSpecGoodById(Integer specGoodId);
 }

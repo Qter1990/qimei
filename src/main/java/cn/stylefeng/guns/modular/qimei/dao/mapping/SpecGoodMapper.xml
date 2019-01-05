@@ -49,7 +49,12 @@
 	<select id="getSpecGood" resultType="java.util.HashMap"
 		parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select g.*, s.id as spec_good_id, s.goods_id, s.name as spec_name, s.value as spec_value, s.stock, s.cost,
-		s.book_count from qimei_goods g, qimei_spec_good s where 1=1
+		s.book_count from qimei_goods g, qimei_spec_good s where 1=1 and g.id=s.goods_id
+	</select>
+	
+	<select id="getOneSpecGood" resultMap="SpecGoodMap">
+		select g.*, s.id as spec_good_id, s.goods_id, s.name as spec_name, s.value as spec_value, s.stock, s.cost,
+		s.book_count from qimei_goods g, qimei_spec_good s where 1=1 and s.id=${id};
 	</select>
 
 </mapper>

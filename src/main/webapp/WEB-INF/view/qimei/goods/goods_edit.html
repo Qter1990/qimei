@@ -1,23 +1,25 @@
 @layout("/common/_container.html"){
-<div class="ibox float-e-margins">
+<div class="ibox float-e-margins" style="height:400px">
     <div class="ibox-content">
         <div class="form-horizontal">
 
             <div class="row">
-                <div class="col-sm-6 b-r">
-                            <#input id="id" name="" value="${item.id}" underline="true"/>
-                            <#input id="number" name="商品编号" value="${item.number}" underline="true"/>
-                            <#input id="name" name="商品名称" value="${item.name}" underline="true"/>
-                            <#input id="unitId" name="单位-字典表 type=2的ID" value="${item.unitId}" />
-                </div>
+                <div class="col-sm-12" id="itemsArea">
+                            <#input id="name" name="商品名称" underline="false" value="${item.good.name}"/>
+                            <#avatar id="manImage" name="主图" underline="false" avatarImg="${item.good.imageUrl}"/>
+                           <#select id="sex" name="单位" underline="false"  value="${unit}">
+								<option value="1">双</option>
+								<option value="2">件</option>
+								<option value="3">个</option>
+							</#select>
+                            <#button btnCss="info" name="添加规格" icon="fa-plus" clickFun="GoodsInfoDlg.addItem()"/>
 
-                <div class="col-sm-6">
-                            <#input id="createDate" name="" value="${item.createDate}" underline="true"/>
-                            <#input id="updateDate" name="" value="${item.updateDate}" underline="true"/>
-                            <#input id="flag" name="数据标记 0显示 1删除" value="${item.flag}" />
                 </div>
             </div>
-
+<div class="progress progress-striped" id="progressTipArea" style="margin-top: 20px;">
+                                    <div id="progressBar" style="width: 0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar progress-bar-info">
+                                    </div>
+                                </div>
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
                     <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="GoodsInfoDlg.editSubmit()"/>
@@ -28,5 +30,20 @@
 
     </div>
 </div>
+<script type="text/template" id="itemTemplate">
+        <div class="form-group" name="specItem" id="specItem">
+           <label class="col-sm-1 control-label">规格名</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text" name="itemName">
+            </div>
+            <label class="col-sm-1 control-label" >规格值（-号隔开）</label>
+            <div class="col-sm-2">
+                <input class="form-control" type="text" name="itemValue">
+            </div>
+            <div class="col-sm-2">
+                <#button btnCss="danger" name="删除" id="cancel" icon="fa-remove" clickFun="GoodsInfoDlg.deleteItem(event)"/>
+            </div>
+        </div>
+    </script>
 <script src="${ctxPath}/static/modular/qimei/goods/goods_info.js"></script>
 @}

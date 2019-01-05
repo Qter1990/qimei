@@ -113,6 +113,14 @@ public class KaptchaController {
      */
     @RequestMapping("/{pictureId}")
     public void renderPicture(@PathVariable("pictureId") String pictureId, HttpServletResponse response) {
+    	if(pictureId.equals("http")) {
+    		try {
+                response.sendRedirect(pictureId);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+    		return;
+    	}
         String path = gunsProperties.getFileUploadPath() + pictureId;
         try {
             byte[] bytes = FileUtil.toByteArray(path);

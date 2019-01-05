@@ -1,6 +1,8 @@
 package cn.stylefeng.guns.modular.qimei.controller;
 
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import net.sf.ehcache.config.TerracottaConfiguration.Consistency;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +17,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.stylefeng.guns.core.common.constant.factory.ConstantFactory;
 import cn.stylefeng.guns.core.common.constant.factory.PageFactory;
 import cn.stylefeng.guns.core.common.page.PageInfoBT;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
@@ -60,12 +63,14 @@ public class GoodsController extends BaseController {
     /**
      * 跳转到修改商品管理
      */
-    @RequestMapping("/goods_update/{goodsId}")
-    public String goodsUpdate(@PathVariable Integer goodsId, Model model) {
-        Goods goods = goodsService.selectById(goodsId);
+    @RequestMapping("/goods_update/{spec_good_id}")
+    public String goodsUpdate(@PathVariable Integer spec_good_id, Model model) {
+        SpecGood goods = goodsService.selectSpecGoodById(spec_good_id);
         model.addAttribute("item",goods);
-        LogObjectHolder.me().set(goods);
-        return PREFIX + "goods_edit.html";
+        model.addAttribute("unit",  ConstantFactory.me().getDictsByName("单位", goods.getGood().getUnitId()));
+       LogObjectHolder.me().set(goods);
+    	
+    	return PREFIX + "goods_edit.html";
     }
 
     /**
@@ -83,32 +88,31 @@ public class GoodsController extends BaseController {
         
         page.setRecords(new GoodWarpper(specGoods).wrap());
         return new PageInfoBT<>(page);
-
-//        for (SpecGood specGood : specGoods) {
-//			Map<String, Object>specGoodMap = new HashMap<>();
-//			specGoodMap.put("id", specGood.getGood().getId());
-//			specGoodMap.put("image", specGood.getGood().getImageUrl());
-//			specGoodMap.put("number", specGood.getGood().getNumber());
-//			specGoodMap.put("name", specGood.getGood().getName());
-//			specGoodMap.put("spec", specGood.getName());
-//			specGoodMap.put("unit", specGood.getGood().getUnitId());
-//			specGoodMap.put("cost", specGood.getCost());
-//			specGoodMap.put("book", specGood.getBookCount());
-//			specGoodMap.put("stock", specGood.getStock());
-//			specGoodMap.put("createDate", specGood.getGood().getCreateDate());
-//			specGoodMap.put("updateDate", specGood.getGood().getUpdateDate());
-//			specGoodsMap.add(specGoodMap);
-//		}
     }
     
 
+    /*
+     * GoodsInfoDlg.collectData = function() {
+	this.goodName = $("#name").val();
+	this.imageUrl = $("#avatar").val();
+	this.unitId = $("#unit").find("option:selected").val();
+
+    var mutiString = "";
+	$("[name='specItem']").each(function(){
+        var specName = $(this).find("[name='itemName']").val();
+        var specVlues = $(this).find("[name='itemValue']").val();
+        mutiString = mutiString + (code + ":" + name + ":"+ num+";");
+    });
+	this.specMutiString = mutiString;
+}
+     */
     /**
      * 新增商品管理
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Object add(Goods goods) {
-        goodsService.insert(goods);
+    public Object add(String goodName, String imageUrl, String unitId, String specMutiString) {
+        goodsService.addGoods(goodName, imageUrl, unitId, specMutiString);
         return SUCCESS_TIP;
     }
 
@@ -135,9 +139,9 @@ public class GoodsController extends BaseController {
     /**
      * 商品管理详情
      */
-    @RequestMapping(value = "/detail/{goodsId}")
+    @RequestMapping(value = "/detail/{specGoodId}")
     @ResponseBody
-    public Object detail(@PathVariable("goodsId") Integer goodsId) {
-        return goodsService.selectById(goodsId);
+    public Object detail(@PathVariable("specGoodId") Integer specGoodId) {
+        return specGoodId;
     }
 }

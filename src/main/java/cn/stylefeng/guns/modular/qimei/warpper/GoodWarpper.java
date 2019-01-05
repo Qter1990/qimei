@@ -33,7 +33,7 @@ public class GoodWarpper extends BaseControllerWrapper {
 	@Override
 	protected void wrapTheMap(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		map.put("image", map.get("image_url"));
+		map.put("image", "/kaptcha/" + map.get("image_url"));
 		
 		//转换单位
 		map.put("unit", ConstantFactory.me().getDictsByName("单位", (Integer)map.get("unit_id")));

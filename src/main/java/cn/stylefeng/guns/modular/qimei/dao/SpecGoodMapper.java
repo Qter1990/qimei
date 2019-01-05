@@ -19,5 +19,8 @@ import cn.stylefeng.guns.modular.qimei.model.SpecGood;
  * @since 2019-01-03
  */
 public interface SpecGoodMapper extends BaseMapper<SpecGood> {
+	
 	public List<Map<String, Object>> getSpecGood(@Param("page") Page<SpecGood> page, @Param("goodName")String goodName);
+
+	public SpecGood getOneSpecGood(@Param("id")Integer id);
 }

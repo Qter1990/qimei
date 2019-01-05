@@ -14,6 +14,7 @@ var Goods = {
 Goods.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
+        	{title: 'id', field: 'spec_good_id', visible: true, align: 'center', valign: 'middle'},
             {title: '主图', field: 'image', visible: true, align: 'center', valign: 'middle', formatter:function(value,row,index){
             	var s;
             	if(row.image!=null){
@@ -55,7 +56,7 @@ Goods.openAddGoods = function () {
     var index = layer.open({
         type: 2,
         title: '添加商品',
-        area: ['800px', '420px'], //宽高
+        area: ['800px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/goods/goods_add'
@@ -71,10 +72,10 @@ Goods.openGoodsDetail = function () {
         var index = layer.open({
             type: 2,
             title: '商品详情',
-            area: ['800px', '420px'], //宽高
+            area: ['800px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/goods/goods_update/' + Goods.seItem.id
+            content: Feng.ctxPath + '/goods/goods_update/' + Goods.seItem.spec_good_id
         });
         this.layerIndex = index;
     }

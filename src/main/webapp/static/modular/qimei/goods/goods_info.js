@@ -2,7 +2,13 @@
  * 初始化商品管理详情对话框
  */
 var GoodsInfoDlg = {
-    goodsInfoData : {}
+    goodsInfoData : {},
+    goodName:"",
+    imageUrl:"",
+    unitId:"",
+    specMutiString:"",
+  //拼接字符串内容(拼接字典条目)
+    itemTemplate: $("#itemTemplate").html(),
 };
 
 /**
@@ -53,14 +59,17 @@ GoodsInfoDlg.newId = function () {
  * 收集数据
  */
 GoodsInfoDlg.collectData = function() {
-    this
-    .set('id')
-    .set('number')
-    .set('name')
-    .set('unitId')
-    .set('createDate')
-    .set('updateDate')
-    .set('flag');
+	this.goodName = $("#name").val();
+	this.imageUrl = $("#manImage").val();
+	this.unitId = $("#unit").find("option:selected").val();
+
+    var mutiString = "";
+	$("[name='specItem']").each(function(){
+        var specName = $(this).find("[name='itemName']").val();
+        var specVlues = $(this).find("[name='itemValue']").val();
+        mutiString = mutiString + (specName + ":" + specVlues + ";");
+    });
+	this.specMutiString = mutiString;
 }
 
 /**
@@ -68,7 +77,17 @@ GoodsInfoDlg.collectData = function() {
  */
 GoodsInfoDlg.addItem = function () {
     $("#itemsArea").append(this.itemTemplate);
-    $("#dictItem").attr("id", this.newId());
+    $("#specItem").attr("id", this.newId());
+    $("#addButton").hide();
+}
+
+/*
+ * 删除条目
+ */
+GoodsInfoDlg.deleteItem = function (event) {
+    var obj = Feng.eventParseObject(event);
+    obj = obj.is('button') ? obj : obj.parent();
+    obj.parent().parent().remove();
 }
 
 /**
@@ -87,7 +106,10 @@ GoodsInfoDlg.addSubmit = function() {
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
-    ajax.set(this.goodsInfoData);
+    ajax.set('goodName',this.goodName);
+    ajax.set('imageUrl',this.imageUrl);
+    ajax.set('unitId',this.unitId);
+    ajax.set('specMutiString',this.specMutiString);
     ajax.start();
 }
 
@@ -99,6 +121,8 @@ GoodsInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
+    
+    
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/goods/update", function(data){
@@ -113,5 +137,8 @@ GoodsInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+	// 初始化头像上传
+    var manImageUp = new $WebUpload("manImage");
+    manImageUp.setUploadBarId("progressBar");
+    manImageUp.init();
 });

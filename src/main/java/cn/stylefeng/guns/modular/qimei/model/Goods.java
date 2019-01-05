@@ -47,11 +47,6 @@ public class Goods extends Model<Goods> {
      * 数据标记 0显示 1删除
      */
     private Integer flag;
-    
-    /*
-     * 商品规格
-     */
-    private List<SpecGood> specGoods;
 
 
     public Integer getId() {
@@ -117,14 +112,6 @@ public class Goods extends Model<Goods> {
     public void setFlag(Integer flag) {
         this.flag = flag;
     }
-
-    public List<SpecGood> getSpecGoods() {
-		return specGoods;
-	}
-
-	public void setSpecGoods(List<SpecGood> specGoods) {
-		this.specGoods = specGoods;
-	}
 
 	@Override
     protected Serializable pkVal() {
